@@ -92,6 +92,9 @@ exclude = ["contrib", "docs", "docs.*", "tests*"]
 addopts = [
     "--import-mode=importlib",
 ]
+# Instruct python to load the project directory in the pythonpath. This way we can run `pytest` directly from the CLI,
+# and the `appdaemon` package is available to be imported in the test code
+pythonpath = "."
 
 # black configuration
 [tool.black]

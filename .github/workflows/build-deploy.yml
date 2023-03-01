@@ -91,6 +91,11 @@ jobs:
           pip install -r dev-requirements.txt
       - name: Build Python package
         run: python -m build
+      # Output generated package version (useful for debug purposes)
+      - name: Print package version
+        run: |
+         PACKAGE_VERSION=$(python -c "from importlib.metadata import version; print(version('appdaemon'))")
+         echo "::notice ::${PACKAGE_VERSION}"
       - name: Upload Python package
         uses: actions/upload-artifact@v3
         with:
