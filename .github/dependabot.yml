@@ -6,6 +6,9 @@ updates:
   schedule:
     interval: daily
   open-pull-requests-limit: 10
+  allow:
+    # Allow only updates of direct dependecies
+    - dependency-type: "direct"
 
 # Maintain dependencies for GitHub Actions
 - package-ecosystem: "github-actions"
