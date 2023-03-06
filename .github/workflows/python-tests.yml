@@ -28,12 +28,13 @@ jobs:
       if: always()
 
   test:
-    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # Test against multiple versions of python and in both ubuntu and windows OS
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11"]
-
+        os: ["ubuntu-latest", "windows-latest"]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
     # https://github.com/actions/setup-python
