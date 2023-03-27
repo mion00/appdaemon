@@ -51,7 +51,7 @@ exceptiongroup==1.1.0
     # via pytest
 feedparser==6.0.10
     # via appdaemon (pyproject.toml)
-filelock==3.9.0
+filelock==3.10.7
     # via virtualenv
 flake8==6.0.0
     # via appdaemon (pyproject.toml)
