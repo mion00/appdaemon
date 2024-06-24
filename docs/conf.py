@@ -14,6 +14,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+from importlib.metadata import version
 import sys
 import os
 
@@ -22,7 +23,9 @@ import os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath(".."))
 
-from appdaemon.version import __version__
+# Retrieve package version using metadata from the package itself
+# https://pypi.org/project/setuptools-scm/
+release = version("appdaemon")
 
 autodoc_mock_imports = ["iso8601", "dateutil"]
 
@@ -66,9 +69,9 @@ author = "Andrew Cockburn"
 # built documents.
 #
 # The short X.Y version.
-version = __version__
+version = ".".join(release.split(".")[:2])  # take only major/minor version numbers
 # The full version, including alpha/beta/rc tags.
-release = __version__
+release = release
 
 
 # There are two options for replacing |today|: either, you set today to some

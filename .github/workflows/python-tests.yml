@@ -44,10 +44,12 @@ jobs:
         cache: 'pip' # caching pip dependencies
         # Manually set 'dev-requirements.txt' as the file to use for dependencies, since `requirements.txt` contains runtime dependencies.
         cache-dependency-path: 'dev-requirements.txt'
+    # Install development dependencies, along with the package itself in editable mode, otherwise it cannot read its own version number at runtime
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r dev-requirements.txt
+        pip install -e .
     - name: Test with pytest
       run: |
         python -m pytest

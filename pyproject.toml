@@ -57,6 +57,7 @@ dev = [
     "flake8 ~= 6.0.0",
     "black ~= 23.1.0",
     'pre-commit ~= 3.1.1; python_version>"3.7"',  # pre-commit does not support Python < 3.8
+    # Tests dependencies
     "pytest ~= 7.2.1"
 ]
 
@@ -74,7 +75,7 @@ appdaemon = "appdaemon.__main__:main"
 
 # Use setuptools as the build system
 [build-system]
-requires = ["setuptools >= 61.0.0"]
+requires = ["setuptools >= 61.0.0", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 # Tell setuptools how to find the package source files
@@ -82,16 +83,19 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 exclude = ["contrib", "docs", "docs.*", "tests*"]
 
-# Dynamically read version from version.py module
-# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html#dynamic-metadata
-[tool.setuptools.dynamic]
-version = {attr = "appdaemon.version.__version__"}
+# Dynamically read package version from Git tags
+# https://pypi.org/project/setuptools-scm/
+[tool.setuptools_scm]
+
 
 # Taken from: https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html
 [tool.pytest.ini_options]
 addopts = [
     "--import-mode=importlib",
 ]
+# Instruct python to load the project directory in the pythonpath. This way we can run `pytest` directly from the CLI,
+# and the `appdaemon` package is available to be imported in the test code
+pythonpath = "."
 
 # black configuration
 [tool.black]
